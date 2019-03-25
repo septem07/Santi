@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TheThreeBodyProblem
+namespace PlanetParameters
 {
-    class PlanetParameters
+    class Planet
     {
         public double coordX;
         public double coordY;

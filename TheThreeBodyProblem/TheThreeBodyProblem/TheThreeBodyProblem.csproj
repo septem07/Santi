@@ -43,9 +43,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlgorithmusCal.cs" />
+    <Compile Include="ConstantsParameter.cs" />
     <Compile Include="PlanetParameters.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReadWrite.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
