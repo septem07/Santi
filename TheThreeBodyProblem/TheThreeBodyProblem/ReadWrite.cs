@@ -22,10 +22,21 @@ namespace InputandOutput
             ref double sun3coordX, ref double sun3coordY, ref double sun3coordZ, ref double sun3veloX, ref double sun3veloY, ref double sun3veloZ, ref double sun3planetMass)
 
         {
+            
             string readLine;
             int counter = 0;
-
-            StreamReader textfile = new System.IO.StreamReader("testdata.txt");
+          
+            string system_language;
+            system_language = System.Globalization.CultureInfo.CurrentCulture.Name;
+            StreamReader textfile;
+            if (system_language.Contains("DE")) 
+            {
+            textfile = new System.IO.StreamReader("testdata_comma.txt");
+            }
+            else
+            {
+            textfile = new System.IO.StreamReader("testdata_point.txt");
+            }
             while ((readLine = textfile.ReadLine()) != null)
             {
                 switch (counter)
