@@ -24,7 +24,9 @@ namespace MainCalculation
             ReadWrite.ReadData(ref timestep, ref finishTime, ref sun1.coordX, ref sun1.coordY, ref sun1.coordZ, ref sun1.veloX, ref sun1.veloY, ref sun1.veloZ, ref sun1.planetMass,
             ref sun2.coordX, ref sun2.coordY, ref sun2.coordZ, ref sun2.veloX, ref sun2.veloY, ref sun2.veloZ, ref sun2.planetMass,
             ref sun3.coordX, ref sun3.coordY, ref sun3.coordZ, ref sun3.veloX, ref sun3.veloY, ref sun3.veloZ, ref sun3.planetMass);
-            string writeLine;
+            string writeLineSun1;
+            string writeLineSun2;
+            string writeLineSun3;
             double countStep = finishTime / timestep;
             double GMmp1p2 = 0;
             double GMmp1p3 = 0;
@@ -45,6 +47,7 @@ namespace MainCalculation
             sun3.ForceUpdate(ref sun3.currentForceX, sun3.currentForceXp1p2, sun3.currentForceXp1p3, ref sun3.currentForceY, sun3.currentForceYp1p2, sun3.currentForceYp1p3,
                 ref sun3.currentForceZ, sun3.currentForceZp1p2, sun3.currentForceZp1p3);
             ReadWrite.DeleteOldWriteFile();
+
             for (int i = 1; i <= countStep; i++)
             {
                 //Calculation position, loop from here
@@ -67,11 +70,12 @@ namespace MainCalculation
                     ref sun2.currentForceZ, sun2.currentForceZp1p2, sun2.currentForceZp1p3);
                 sun3.ForceUpdate(ref sun3.currentForceX, sun3.currentForceXp1p2, sun3.currentForceXp1p3, ref sun3.currentForceY, sun3.currentForceYp1p2, sun3.currentForceYp1p3,
                     ref sun3.currentForceZ, sun3.currentForceZp1p2, sun3.currentForceZp1p3);
-                writeLine = System.Convert.ToString(sun1.coordX + "," + sun1.coordY + "," + sun1.coordZ +
-                    " " + sun2.coordX + "," + sun2.coordY + "," + sun2.coordZ +
-                    " " + sun3.coordX + "," + sun3.coordY + "," + sun3.coordZ);
-                ReadWrite.WriteData(writeLine);
-
+                writeLineSun1 = System.Convert.ToString(sun1.coordX + "," + sun1.coordY + "," + sun1.coordZ);
+                writeLineSun2 = System.Convert.ToString(sun2.coordX + "," + sun2.coordY + "," + sun2.coordZ);
+                writeLineSun3 = System.Convert.ToString(sun3.coordX + "," + sun3.coordY + "," + sun3.coordZ);
+                ReadWrite.WriteData(writeLineSun1,1);
+                ReadWrite.WriteData(writeLineSun2,2);
+                ReadWrite.WriteData(writeLineSun3,3);
             }
             //Console.WriteLine("{0},{1},{2}", sun1.coordX, sun1.coordY, sun1.coordZ);
             Console.ReadLine();

@@ -17,6 +17,17 @@ namespace InputandOutput
             readYParameter = System.Convert.ToDouble(parametersCut[1]);
             readZParameter = System.Convert.ToDouble(parametersCut[2]);
         }
+        private string ChangeDataToD(string strData)
+        {
+            Decimal dData = 0.0M;
+            if (strData.Contains("E"))
+            {
+                dData = Convert.ToDecimal(Decimal.Parse(strData.ToString(), System.Globalization.NumberStyles.Float));
+            }
+            return dData.ToString();
+
+        }
+
         public static void ReadData(ref double timestep, ref double finishTime, ref double sun1coordX, ref double sun1coordY, ref double sun1coordZ, ref double sun1veloX, ref double sun1veloY, ref double sun1veloZ, ref double sun1planetMass,
             ref double sun2coordX, ref double sun2coordY, ref double sun2coordZ, ref double sun2veloX, ref double sun2veloY, ref double sun2veloZ, ref double sun2planetMass,
             ref double sun3coordX, ref double sun3coordY, ref double sun3coordZ, ref double sun3veloX, ref double sun3veloY, ref double sun3veloZ, ref double sun3planetMass)
@@ -89,26 +100,53 @@ namespace InputandOutput
             }
 
         }
-        public static void WriteData(string writeLine)
+        public static void WriteData(string writeLine, int sunNo)
         {
-
-            StreamWriter coordWriter = new StreamWriter("testwrite.txt", true, System.Text.Encoding.Default);
-            coordWriter.WriteLine(writeLine);
-            coordWriter.Close();
+            switch (sunNo)
+            {
+                case 1:
+                    StreamWriter sun1Writer = new StreamWriter("Sun1Coordinate.txt", true, System.Text.Encoding.Default);
+                    sun1Writer.WriteLine(writeLine);
+                    sun1Writer.Close();
+                    break;
+                case 2:
+                    StreamWriter sun2Writer = new StreamWriter("Sun2Coordinate.txt", true, System.Text.Encoding.Default);
+                    sun2Writer.WriteLine(writeLine);
+                    sun2Writer.Close();
+                    break;
+                case 3:
+                    StreamWriter sun3Writer = new StreamWriter("Sun3Coordinate.txt", true, System.Text.Encoding.Default);
+                    sun3Writer.WriteLine(writeLine);
+                    sun3Writer.Close();
+                    break;
+            }
+         
 
         }
+  
+
         public static void DeleteOldWriteFile()
         {
-            if (System.IO.File.Exists("testwrite.txt"))
+            List<string> writeDataFile = new List<string>
             {
-                try
+                "Sun1Coordinate.txt",
+                "Sun2Coordinate.txt",
+                "Sun3Coordinate.txt"
+            };
+            foreach (string item in writeDataFile)
                 {
-                    System.IO.File.Delete("testwrite.txt");
-                }
-                catch (System.IO.IOException e)
+
+                if (System.IO.File.Exists(item))
                 {
-                    Console.WriteLine(e.Message);
-                    return;
+                    try
+                    {
+                        System.IO.File.Delete(item);
+                    }
+                    catch (System.IO.IOException e)
+                    {
+                        Console.WriteLine(e.Message);
+                        return;
+                    }
                 }
             }
         }
